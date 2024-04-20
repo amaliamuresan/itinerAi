@@ -36,6 +36,10 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(forceMaterialTransparency: true, backgroundColor: DesignColors.grey0, title: Row(children: [Padding(
+        padding: const EdgeInsets.only(right: 6.0),
+        child: Image.asset('assets/logos/itinerAI-orange.png', height: 30,),
+      ), Text('for ${widget.destination.destinationName}''', style: ThemeText.bodyLargeRegular.copyWith(color: DesignColors.grey7),)],),),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: FutureBuilder(

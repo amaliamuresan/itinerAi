@@ -1,4 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
+import 'package:itiner_ai/colors/colors.dart';
 import 'package:itiner_ai/models/gtp_attraction.dart';
 import 'package:itiner_ai/style/text_style.dart';
 
@@ -16,41 +20,89 @@ class ItineraryItem extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                attraction.hour,
-                style: ThemeText.h3.apply(color: Colors.black87),
+              Image.asset(
+                'assets/logos/Star_icon.png',
+                width: 30,
+                height: 30,
               ),
-              const SizedBox(width: 8),
-              Text(
-                attraction.duration,
-                style: ThemeText.bodyMediumRegular.apply(color: Colors.black54),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Container(
-                  height: 1,
-                  width: double.infinity,
-                  color: Colors.black26,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      border:
+                          Border.all(width: 2, color: DesignColors.orangeDark)),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+                    child: Text(
+                      attraction.hour,
+                      style: ThemeText.bodyLargeRegular
+                          .apply(color: DesignColors.orangeDark),
+                    ),
+                  ),
                 ),
-              )
+              ),
+              DecoratedBox(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    border:
+                    Border.all(width: 2, color: DesignColors.orangeDark)),
+                child: Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+                  child: Text(
+                    attraction.duration,
+                    style: ThemeText.bodyLargeRegular
+                        .apply(color: DesignColors.orangeDark),
+                  ),
+                ),
+              ),
             ],
           ),
-          const SizedBox(height: 8),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image.network(
-              attraction.thumbnailHiResURL,
-              errorBuilder: (_, __, ___) => Container(),
-              height: 200,
-              width: 300,
-              fit: BoxFit.fill,
+          Padding(padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Text(attraction.descriptionText,style: ThemeText.bodyLargeRegular.copyWith(color: DesignColors.grey7),)),
+          Row(children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.network(
+                attraction.thumbnailHiResURL,
+                errorBuilder: (_, __, ___) => Image.asset(
+                  'assets/logos/star_placeholder.png',
+                  width: 200,
+                  height: 200,
+                ),
+                height: 200,
+                width: 200,
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Text(
+                      attraction.title,
+                      style: ThemeText.h4Bold.apply(color: DesignColors.grey7),
+                    ),
+                  ),
+                  const SizedBox(width: 14,),
+                  TextButton(
+                    style: const ButtonStyle(padding: MaterialStatePropertyAll(EdgeInsets.zero)),
+                      onPressed: () {},
+                      child: Text(
+                        'Learn More',
+                        style: ThemeText.bodyLargeRegular
+                            .copyWith(color: DesignColors.grey4),
+                      ),),
+                ],
+              ),
+            )
+          ]),
           const SizedBox(height: 12),
-          Text(
-            attraction.title,
-            style: ThemeText.bodyLargeBold.apply(color: Colors.black54),
-          ),
         ],
       ),
     );
