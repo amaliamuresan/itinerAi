@@ -1,14 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:itiner_ai/reformat_api_response.dart';
-import 'package:itiner_ai/services/open_ai_service.dart';
 import 'package:itiner_ai/ui/set_location_page.dart';
 
 import 'colors/colors.dart';
-import 'models/question.dart';
-import 'package:itiner_ai/pages/intro_screens.dart';
 
 void main() {
   runApp(const MyApp());
