@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:itiner_ai/colors/colors.dart';
 import 'package:itiner_ai/ui/questions_page.dart';
+import 'package:lottie/lottie.dart';
 
 import '../models/destination.dart';
 import '../services/viator_service.dart';
@@ -29,7 +30,7 @@ class _SetLocationPageState extends State<SetLocationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DesignColors.introBg2,
+      backgroundColor: DesignColors.grey1,
       body: FutureBuilder(
           future: future,
           builder: (context, snapshot) {
@@ -39,25 +40,35 @@ class _SetLocationPageState extends State<SetLocationPage> {
               return Padding(
                 padding: const EdgeInsets.all(42),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Spacer(),
                     const Spacer(),
+                    Image.asset(
+                      "assets/logos/itinerAI-orange.png",
+                      height: 32,
+                    ),
+                    const SizedBox(height: 24),
                     Text(
                       "Where are you going?",
-                      style: ThemeText.h1,
+                      style:
+                          ThemeText.h1.copyWith(color: DesignColors.introBg3),
                     ),
                     const Spacer(),
                     TextFormField(
                       controller: controller,
-                      style: TextStyle(color: Colors.white),
+                      style:
+                          ThemeText.h3.copyWith(color: DesignColors.orangeDark),
                       decoration: const InputDecoration(
                         hintText: "type your destination",
-                        hintStyle: TextStyle(color: Colors.white54),
+                        hintStyle: TextStyle(color: DesignColors.grey4),
                         enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
+                          borderSide:
+                              BorderSide(color: DesignColors.mainRedDark),
                         ),
                         focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
+                          borderSide:
+                              BorderSide(color: DesignColors.mainRedDark),
                         ),
                       ),
                     ),
@@ -69,7 +80,7 @@ class _SetLocationPageState extends State<SetLocationPage> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
-                          backgroundColor: DesignColors.grey0,
+                          backgroundColor: DesignColors.orangeDark,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                             //borderRadius: BorderRadius.zero, //Rectangular border
@@ -82,18 +93,10 @@ class _SetLocationPageState extends State<SetLocationPage> {
                             if (kDebugMode) {
                               print(destination?.toJson());
                             }
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              backgroundColor: DesignColors.grey1,
-                              content: Text(
-                                "Your destination is set!",
-                                style: ThemeText.bodyMediumRegular
-                                    .apply(color: DesignColors.mainColor),
-                              ),
-                            ));
-                            Navigator.of(context)!.pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => QuestionsPage(
-                                        destination: destination!)));
+
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    QuestionsPage(destination: destination!)));
                           } catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               backgroundColor: DesignColors.grey1,
@@ -108,7 +111,7 @@ class _SetLocationPageState extends State<SetLocationPage> {
                         child: Text(
                           "Continue",
                           style: ThemeText.h4Regular
-                              .apply(color: DesignColors.mainRedDark),
+                              .apply(color: DesignColors.grey0),
                         ),
                       ),
                     )
@@ -116,7 +119,10 @@ class _SetLocationPageState extends State<SetLocationPage> {
                 ),
               );
             } else {
-              return Center(child: CircularProgressIndicator());
+              return Center(
+                child: Lottie.asset("assets/animations/loading.json",
+                    width: 100, height: 100),
+              );
             }
           }),
     );

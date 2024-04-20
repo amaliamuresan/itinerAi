@@ -68,7 +68,7 @@ flutter:
      - assets/animations/loading.json
      - assets/logos/itinerAI-white.png
      - assets/logos/itinerAI-orange.png
-     - assets/viator_resp.json
+#     - assets/viator_resp.json
 #     - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

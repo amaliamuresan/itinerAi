@@ -11,7 +11,7 @@ class ViatorService {
   static String usersEndpointForAttractions = '/v1/taxonomy/attractions';
 
   static Map<String, String> headers = {
-    "exp-api-key": ,
+    "exp-api-key": "token here",
     // "Accept-Language": "en",
     "Content-Type": "application/json",
     // "Accept": "application/json;version=2.0"

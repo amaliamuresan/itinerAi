@@ -12,15 +12,15 @@ class DestinationChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: isSelected ? DesignColors.introBg3 : Colors.white,
+        borderRadius: BorderRadius.circular(5),
+        color: isSelected ? DesignColors.orangeDark : DesignColors.grey0,
       ),
       child: Text(
         text,
         style: ThemeText.bodyMediumRegular
-            .apply(color: isSelected ? Colors.white : Colors.black87),
+            .apply(color: isSelected ? DesignColors.grey0 : DesignColors.grey7),
       ),
     );
   }

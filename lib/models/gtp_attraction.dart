@@ -6,6 +6,7 @@ class GptAttraction {
   final String thumbnailHiResURL;
   final String hour;
   final String duration;
+  final String descriptionText;
 
   GptAttraction(
     this.hour,
@@ -13,7 +14,25 @@ class GptAttraction {
     required this.title,
     required this.webURL,
     required this.thumbnailHiResURL,
+    required this.descriptionText,
   });
+
+  GptAttraction copyWith(
+      {String? title,
+      String? webURL,
+      String? thumbnailHiResURL,
+      String? hour,
+      String? duration,
+      String? descriptionText}) {
+    return GptAttraction(
+      hour ?? this.hour,
+      duration ?? this.duration,
+      title: title ?? this.title,
+      webURL: webURL ?? this.webURL,
+      thumbnailHiResURL: thumbnailHiResURL ?? this.thumbnailHiResURL,
+      descriptionText: descriptionText ?? this.descriptionText,
+    );
+  }
 
   factory GptAttraction.fromJson(Map<String, dynamic> json) {
     return GptAttraction(
@@ -22,6 +41,7 @@ class GptAttraction {
       title: json['attractionName'] as String? ?? "",
       webURL: json['webURL'] as String,
       thumbnailHiResURL: json['thumbnailHiResURL'] as String? ?? '',
+      descriptionText: json['descriptionText'] as String? ?? '',
     );
   }
 }

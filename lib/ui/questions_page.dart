@@ -5,6 +5,7 @@ import 'package:itiner_ai/colors/colors.dart';
 import 'package:itiner_ai/models/destination.dart';
 import 'package:itiner_ai/ui/itinerary_screen.dart';
 import 'package:itiner_ai/ui/question_item.dart';
+import 'package:lottie/lottie.dart';
 
 import '../models/question.dart';
 import '../models/question_response.dart';
@@ -34,7 +35,7 @@ class _QuestionsPageState extends State<QuestionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DesignColors.grey0,
+      backgroundColor: DesignColors.grey1,
       body: FutureBuilder(
           future: future,
           builder: (context, snapshot) {
@@ -48,16 +49,13 @@ class _QuestionsPageState extends State<QuestionsPage> {
                         itemCount: snapshot.data?.length ?? 0,
                         itemBuilder: (context, index) => Visibility(
                           visible: index <= questionResponses.length,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            child: QuestionItem(
-                              question: snapshot.data![index],
-                              questionResponse:
-                                  questionResponses.elementAtOrNull(index),
-                              onResponseTap: (QuestionResponse response) {
-                                setState(() => questionResponses.add(response));
-                              },
-                            ),
+                          child: QuestionItem(
+                            question: snapshot.data![index],
+                            questionResponse:
+                                questionResponses.elementAtOrNull(index),
+                            onResponseTap: (QuestionResponse response) {
+                              setState(() => questionResponses.add(response));
+                            },
                           ),
                         ),
                       ),
@@ -100,7 +98,22 @@ class _QuestionsPageState extends State<QuestionsPage> {
                 ],
               );
             } else {
-              return const CircularProgressIndicator();
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Lottie.asset("assets/animations/loading.json",
+                        width: 100, height: 100),
+                    const SizedBox(height: 32),
+                    Text(
+                      "your destination is set...\nI am preparing the questions",
+                      textAlign: TextAlign.center,
+                      style: ThemeText.bodyLargeRegular
+                          .copyWith(color: DesignColors.grey4),
+                    )
+                  ],
+                ),
+              );
             }
           }),
     );

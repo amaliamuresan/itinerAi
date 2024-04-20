@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:itiner_ai/ui/set_location_page.dart';
+import 'package:itiner_ai/pages/intro_screens.dart';
 
 import 'colors/colors.dart';
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         unselectedWidgetColor: Colors.black.withOpacity(0.7),
         colorSchemeSeed: DesignColors.mainColor,
       ),
-      home: SetLocationPage(),
+      home: IntroScreens(),
     );
   }
 }
