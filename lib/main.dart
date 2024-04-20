@@ -8,6 +8,7 @@ import 'package:itiner_ai/ui/set_location_page.dart';
 
 import 'colors/colors.dart';
 import 'models/question.dart';
+import 'package:itiner_ai/pages/intro_screens.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,66 +53,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  Future<void> _incrementCounter() async {
-    final resp = await rootBundle.loadString('assets/viator_resp.json');
-    final data = await json.decode(resp);
-
-    // Parse JSON string into a list of attractions
-
-    // Extract required fields from each attraction in each list
-    // final destinations = await ViatorService().getDestinations();
-    final attractions = decodeAttractions(data);
-    // // print(attractions.map((e) => e.toJson()));
-    // print(destinations);
-    // final response = await OpenAiService().request("""
-    //     // You are creating an itinerary for one day in Berlin, there are the attractions available: ${attractions.map((e) => e.toJson())}
-    //     // Based on these attractions, create the itinerary which will have the following structure:
-    //     // [
-    //     // {"time":string,
-    //     // "attraction_title: string,
-    //     // durationL: int},
-    //     // .
-    //     // .
-    //     // .
-    //     // ]
-    //     // """);
-    try {
-      final response = await OpenAiService().request("""
-      You are helping me plan a trip to Berlin. You have ask me a set of 4-5 questions that should give you an idea about my expectations about the trip, and the result is an itinerary for a full day. Do not mention landmarks in the questions you're asking. The questions should be fun with a bit of self deprecation, pointing the fact that you are an AI and travelling and visiting is not a thing you usually do. You could include prompts like: "Berlin sounds nice, I guess, never been there. You know, as an AI, you I am happy for you" or "I envy you, I've seen the parties in Berlin are something else. I get to see that on the internet... I am an AI, you know.". You could mention things AI related every few questions.
-Generate it in the following json structure:
-{
-[
-"prompt":"...",
-"options":["...","...",...]
-],
-...
-}
-      """);
-      final decodedResp = await json.decode(response!);
-      final questions = decodeQuestions(decodedResp);
-      print("questions $questions");
-      //   final inResponse = await OpenAiService().request('''
-      //   Generate an itinerary for one day for a tourist in Berlin. There are the attractions he can visit:${attractions.map((e) => e.toJson())}
-      //   The user like this to the following questions:
-      //   1. Are you interested in outdoor activities? yes
-      //   2. Do you like museums? No
-      //   3. Do you prefer German or international food? German
-      //   The itinerary should be a json format look like this:
-      //   [
-      //   {
-      //     "hour":9.00AM,
-      //     "attraction" Checkpoint-Charlie,
-      //     "duration": 2h,
-      //   },
-      //   .
-      //   .
-      //   .
-      //   ]
-      //   ''');
-      //   print(inResponse);
-    } catch (e) {
-      print(e);
-    }
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter++;
+    });
   }
 
   @override
